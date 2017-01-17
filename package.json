@@ -1,0 +1,25 @@
+{
+  "name": "art-portfolio",
+  "version": "1.0.0",
+  "description": "Web app to upload digital art in a proffecional format, is develop in MEAN stack",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seradiazpin/art-portfolio.git"
+  },
+  "keywords": [
+    "art"
+  ],
+  "author": "seradiazpin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seradiazpin/art-portfolio/issues"
+  },
+  "homepage": "https://github.com/seradiazpin/art-portfolio#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
