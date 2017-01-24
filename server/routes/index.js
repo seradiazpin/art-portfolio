@@ -24,8 +24,9 @@ routes.get('/', function(req, res) {
 routes.get('/login', function(req, res) {
 
     // render the page and pass in any flash data if it exists
-    res.render('login.html', { message: req.flash('loginMessage') });
+    res.render('login.ejs', { message: req.flash('loginMessage') });
 });
+
 
 // process the login form
 // app.post('/login', do all our passport stuff here);
