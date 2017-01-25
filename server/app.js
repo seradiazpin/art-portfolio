@@ -16,13 +16,11 @@ const app = express();
 // get all the tools we need
 
 const mongoose = require('mongoose');
-const passport = require('passport');
-const flash    = require('connect-flash');
 
 const morgan       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
-const session      = require('express-session');
+
 
 const configDB = require('./config/database.js');
 
@@ -42,11 +40,7 @@ app.use(express.static(__dirname + "/public"));
 app.set('views', __dirname +'/public/views');
 app.set('view engine', 'ejs'); // set up ejs for templating
 
-// required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 // routes ======================================================================
 //require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
