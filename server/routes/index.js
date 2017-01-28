@@ -76,6 +76,15 @@ routes.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
+// =====================================
+// portfolio ==============================
+// =====================================
+routes.get('/portfolio/edit', isLoggedIn, function(req, res) {
+    res.render('portfolio.ejs', {
+        user : req.user // get the user out of session and pass to template
+    });
+});
+
 // process the signup form
 routes.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/profile', // redirect to the secure profile section

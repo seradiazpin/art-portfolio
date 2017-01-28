@@ -33,7 +33,7 @@
                 </div>
                 <div class="clearfix"></div>
 
-                <h2 class="name"><b>Roland</b> Maruntelu</</h2>
+                <h2 class="name"><b><%= user.local.name %></b></h2>
                 <h3 class="position">Web Designer & Wordpress Theme Developer</h3>
                 <h4 class="text-center location">based in Bucharest, Romania</h4>
                 <div class="title-divider">
@@ -45,9 +45,9 @@
             </div>
 
             <div class="col-md-8 col-md-offset-2 text-center">
-                <p class="caption">I'm Roland Maruntelu, webdesigner & wordpress theme developer at <a href="http://rolyart.ro">rolyart.ro.</a>I have a passion for creating challenging, clean and beautiful websit e/ wordpress themes.</p>
-                <h2 class="slogan">" Wordpress Theme is not just a job, it's a passion."</h2>
-                <a href="http://rolandtheme.com" class="btn btn-default secondary-bg btn-lg">View my portfolio</a>
+                <p class="caption"><%= user.local.acountType %></p>
+                <h2 class="slogan"><%= user.local.email %></h2>
+                <a href="/portfolio/edit" class="btn btn-default secondary-bg btn-lg">View my portfolio</a>
                 <a href="http://rolyart.ro/contact" class="btn btn-default page-scroll primary-bg btn-lg">Request custom theme</a>
             </div>
         </div>
