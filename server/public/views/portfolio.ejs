@@ -6,53 +6,107 @@
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
-        #outer-dropzone {
-            height: 140px;
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            background-color:#568eb9;
+            background-image: linear-gradient(rgba(255,255,255,.3) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(255,255,255,.3) 2px, transparent 2px),
+            linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px);
+            background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
+        }
+        .drop-zone {
+            height: 70vh;
+            position: relative;
+        }
+        .steps {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            background: white;
+            border: 1px solid #568eb9;
+            box-shadow: 0 5px 15px rgba(0,0,0,.2);
+        }
+        .step-1 { top:  50px; left:   50px; }
+        .step-2 { top: 200px; left:   50px; }
+        .step-3 { top: 250px; left:  200px; }
+        .step-4 { top: 250px; left:  350px; }
+        .step-5 { top: 250px; left:  500px; }
+        .step-6 { top: 200px; left: 650px; }
+
+        .can--drop:not(.caught--it):not(.can--catch) {
+            /*animation: bounce 1.5s ease infinite;*/
+            animation: glow 1.5s ease infinite;
         }
 
-        #inner-dropzone {
-            height: 80px;
+        @keyframes glow {
+            50% {
+                background: rgba(255,255,255,.6);
+            }
         }
 
-        .dropzone {
-            background-color: #ccc;
-            border: dashed 4px transparent;
-            border-radius: 4px;
-            margin: 10px auto 30px;
-            padding: 10px;
-            width: 80%;
-            transition: background-color 0.3s;
+        @keyframes bounce {
+            50% {
+                transform:
+                        scale(.98)
+                        translateY(-5%);
+            }
         }
 
-        .drop-active {
-            border-color: #aaa;
+        .steps:before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%; width: 100%;
+            background: #6dc001;
+
+            transform-origin: center;
+            transform: scale(0);
+        }
+        .can--catch:before {
+            animation: grow .75s ease infinite;
         }
 
-        .drop-target {
-            background-color: #29e;
-            border-color: #fff;
-            border-style: solid;
+        @keyframes grow {
+            from { transform: scale(0); }
+            to {
+                opacity: 0;
+                transform: scale(1);
+            }
         }
 
-        .drag-drop {
+
+        .drag-zone {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            height: 30vh;
+            background: rgba(255,255,255,.3);
+            border-top: 1px solid rgba(255,255,255,.5);
+        }
+        .drag-wrap {
+            width: 100px;
+        }
+        .drag-zone .draggable {
             display: inline-block;
-            min-width: 40px;
-            padding: 2em 0.5em;
-
-            color: #fff;
-            background-color: #29e;
-            border: solid 2px #fff;
-
-            -webkit-transform: translate(0px, 0px);
-            transform: translate(0px, 0px);
-
-            transition: background-color 0.3s;
+        }
+        .draggable {
+            cursor: -webkit-grab;
+            cursor:    -moz-grab;
+            cursor:         grab;
+        }
+        .draggable.getting--dragged {
+            cursor: -webkit-grabbing;
+            cursor:    -moz-grabbing;
+            cursor:         grabbing;
         }
 
-        .drag-drop.can-drop {
-            color: #000;
-            background-color: #4e4;
-        }
+        .draggable { max-width: 100%; height: auto; }
 
         body,html{
             height: 100%;
@@ -259,16 +313,35 @@
     </div>
 </nav>
 <div class="main">
-    <!-- Content Here -->
-    <div id="no-drop" class="draggable drag-drop"> #no-drop </div>
-
-    <div id="yes-drop" class="draggable drag-drop"> #yes-drop </div>
-
-    <div id="outer-dropzone" class="dropzone">
-        #outer-dropzone
-        <div id="inner-dropzone" class="dropzone">#inner-dropzone</div>
+    <div id="js-drop" class="drop-zone" data-order="2,4,5,3,6,1">
+        <div class="droppable steps step-1"></div>
+        <div class="droppable steps step-2"></div>
+        <div class="droppable steps step-3"></div>
+        <div class="droppable steps step-4"></div>
+        <div class="droppable steps step-5"></div>
+        <div class="droppable steps step-6"></div>
     </div>
 
+    <div id="js-drag" class="drag-zone">
+        <div class="drag-wrap">
+            <img class="draggable" src="http://placehold.it/150x150">
+        </div>
+        <div class="drag-wrap">
+            <img class="draggable" src="http://placehold.it/100x100">
+        </div>
+        <div class="drag-wrap">
+            <img class="draggable" src="http://placehold.it/100x100">
+        </div>
+        <div class="drag-wrap">
+            <img class="draggable" src="http://placehold.it/100x100">
+        </div>
+        <div class="drag-wrap">
+            <img class="draggable" src="http://placehold.it/100x100">
+        </div>
+        <div class="drag-wrap">
+            <img class="draggable" src="http://placehold.it/100x100">
+        </div>
+    </div>
 </div>
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
@@ -276,91 +349,6 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="../js/interact.min.js"></script>
-<script>
-    /* The dragging code for '.draggable' from the demo above
-     * applies to this demo as well so it doesn't have to be repeated. */
-    console.log("LOL?");
-    // target elements with the "draggable" class
-    interact('.draggable')
-        .draggable({
-            // enable inertial throwing
-            inertia: true,
-            // keep the element within the area of it's parent
-            restrict: {
-                restriction: "parent",
-                endOnly: true,
-                elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-            },
-            // enable autoScroll
-            autoScroll: true,
+<script src="../js/snap.js"></script>
 
-            // call this function on every dragmove event
-            onmove: dragMoveListener,
-            // call this function on every dragend event
-            onend: function (event) {
-                var textEl = event.target.querySelector('p');
-
-                textEl && (textEl.textContent =
-                    'moved a distance of '
-                    + (Math.sqrt(event.dx * event.dx +
-                        event.dy * event.dy)|0) + 'px');
-            }
-        });
-
-    function dragMoveListener (event) {
-        var target = event.target,
-            // keep the dragged position in the data-x/data-y attributes
-            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-        // translate the element
-        target.style.webkitTransform =
-            target.style.transform =
-                'translate(' + x + 'px, ' + y + 'px)';
-
-        // update the posiion attributes
-        target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);
-    }
-
-    // this is used later in the resizing and gesture demos
-    window.dragMoveListener = dragMoveListener;
-    // enable draggables to be dropped in   to this
-    interact('.dropzone').dropzone({
-        // only accept elements matching this CSS selector
-        accept: '#yes-drop',
-        // Require a 75% element overlap for a drop to be possible
-        overlap: 0.75,
-
-        // listen for drop related events:
-
-        ondropactivate: function (event) {
-            // add active dropzone feedback
-            event.target.classList.add('drop-active');
-        },
-        ondragenter: function (event) {
-            var draggableElement = event.relatedTarget,
-                dropzoneElement = event.target;
-
-            // feedback the possibility of a drop
-            dropzoneElement.classList.add('drop-target');
-            draggableElement.classList.add('can-drop');
-            draggableElement.textContent = 'Dragged in';
-        },
-        ondragleave: function (event) {
-            // remove the drop feedback style
-            event.target.classList.remove('drop-target');
-            event.relatedTarget.classList.remove('can-drop');
-            event.relatedTarget.textContent = 'Dragged out';
-        },
-        ondrop: function (event) {
-            event.relatedTarget.textContent = 'Dropped';
-        },
-        ondropdeactivate: function (event) {
-            // remove active dropzone feedback
-            event.target.classList.remove('drop-active');
-            event.target.classList.remove('drop-target');
-        }
-    });
-</script>
 </body>
