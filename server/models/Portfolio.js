@@ -2,10 +2,6 @@
  * Created by sergiodiazpinilla on 29/01/17.
  */
 
-/**
- * Created by sergiodiazpinilla on 19/01/17.
- */
-
 // app/models/Portfolio.js
 // load the things we need
 const mongoose = require('mongoose');
@@ -21,17 +17,17 @@ const portfolioSchema = mongoose.Schema({
 
 // methods ======================
 // add image principal
-userSchema.methods.addImages = function(imgUrl) {
+portfolioSchema.methods.addImages = function(imgUrl) {
     return this.principalImg.push(imgUrl);
 };
 
 // add art piece
-userSchema.methods.addImages = function(imgId) {
+portfolioSchema.methods.addImages = function(imgId) {
     return this.principalImg.push(imgId);
 };
 
 // get all images
-userSchema.methods.consult = function() {
+portfolioSchema.methods.consult = function() {
     return this.artPieces;
 };
 
